@@ -28,9 +28,12 @@ class logrotate::base {
       source  => 'puppet:///modules/logrotate/etc/cron.daily/logrotate';
   }
 
-  case $::operatingsystem {
-    'Debian','Ubuntu': {
+  case $::osfamily {
+    debian: {
       include logrotate::defaults::debian
+    }
+    redhat: {
+      include logrotate::defaults::redhat
     }
     default: { }
   }
